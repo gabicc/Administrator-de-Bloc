@@ -1,9 +1,9 @@
 
+from help import afis_choices
 from utils import *
 from datetime import datetime
 import os
 from cheltuiala import Cheltuiala
-
 
 payments = []
 old_payments = []
@@ -13,26 +13,6 @@ if os.path.exists("Payments.txt"):
         for payment in f:
             items = payment.strip().split("|")
             payments.append(Cheltuiala(int(items[0]), items[1], int(items[2]), datetime.strptime(items[3], "%Y-%m-%d")))
-
-def afis_choices():
-    print("\n1. Adaugă cheltuială pentru un apartament")
-    print("2. Modifică cheltuială")
-    print("3. Șterge toate cheltuielile de la un apartament")
-    print("4. Șterge cheltuielile de la apartamente consecutive "
-          "(Ex. se dau două numere de apartament 2 și 5 și se șterg toate cheltuielile de la apartamentele 1,2,3,4 și 5)")
-    print("5. Șterge cheltuielile de un anumit tip de la toate apartamentele")
-    print("6. Tipărește toate apartamentele care au cheltuieli mai mari decât o sumă dată")
-    print("7. Tipărește cheltuielile de un anumit tip de la toate apartamentele")
-    print("8. Tipărește toate cheltuielile efectuate înainte de o zi și mai mari decât o sumă (se dă suma și ziua)")
-    print("9. Tipărește suma totală pentru un tip de cheltuială")
-    print("10. Tipărește toate apartamentele sortate după un tip de cheltuială")
-    print("11. Tipărește totalul de cheltuieli pentru un apartament dat")
-    print("12. Elimină toate cheltuielile de un anumit tip")
-    print("13. Elimină toate cheltuielile mai mici decât o sumă dată")
-    print("14. Reface ultima operație (lista de cheltuieli revine la ce exista înainte de ultima operație care a modificat lista).")
-    print("15. Lista totala de cheltuieli")
-    print("0. Iesi din aplicatie")
-    print("Alege numarul corespunzator unei operatii de mai sus: ")
 
 copy_payments(payments, old_payments)
 
