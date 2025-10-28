@@ -78,9 +78,11 @@ def modifica_cheltuiala():
     pret = int(input("Pret: "))
     date_string = input("Data aparitie: ")
     date_object = datetime.strptime(date_string, "%Y-%m-%d")
-    for p in payments:
+    for i, p in enumerate(payments):
         if p.apartament == app and p.tip == tip and p.data_aparitie == date_object:
-            p.pret = pret
+            #p.pret = pret
+            payments.remove(p)
+            payments.insert(i, Cheltuiala(p.apartament, p.tip, pret, p.data_aparitie))
 
 def cheltuieli_same_tip(a):
     for p in payments:
@@ -117,7 +119,7 @@ def delete_tip_chel(tipp):
 
 def sum_tip_chel(tipp):
     total = 0
-    with open("Payments.txt", "r") as f:
+    with open("../Payments.txt", "r") as f:
         for payment in f:
             items = payment.strip().split("|")
             if items[1] == tipp:
@@ -126,7 +128,7 @@ def sum_tip_chel(tipp):
 
 def sum_chel_app(nr_app):
     total = 0
-    with open("Payments.txt", "r") as f:
+    with open("../Payments.txt", "r") as f:
         for payment in f:
             items = payment.strip().split("|")
             if int(items[0]) == nr_app:
@@ -134,7 +136,7 @@ def sum_chel_app(nr_app):
     return total
 
 def afis_tip_chel(tip_chel):
-    with open("Payments.txt", "r") as f:
+    with open("../Payments.txt", "r") as f:
         for payment in f:
             items = payment.strip().split("|")
             if items[1] == tip_chel:
@@ -178,7 +180,7 @@ while True:
             copy_payments()
             nr_app = int(input("Nr apartament: "))
             delete_chel_app(nr_app)
-            with open("Payments.txt", "r") as f:
+            with open("../Payments.txt", "r") as f:
                 for p in f:
                     print(p.strip())
         case 4:
@@ -187,14 +189,14 @@ while True:
             sfarsit = int(input("Apartament sfarsit: "))
             for i in range(inceput, sfarsit + 1):
                 delete_chel_app(i)
-            with open("Payments.txt", "r") as f:
+            with open("../Payments.txt", "r") as f:
                 for p in f:
                     print(p.strip())
         case 5:
             copy_payments()
             tip_chel = input("Tip cheltuiala: ")
             delete_tip_chel(tip_chel)
-            with open("Payments.txt", "r") as f:
+            with open("../Payments.txt", "r") as f:
                 for p in f:
                     print(p.strip())
         case 6:
@@ -262,5 +264,5 @@ while True:
     4|gaz|130|2025-06-14
     5|apa|150|2025-07-31
     6|televizor|300|2025-07-31
-    1|televizor|731|2025-07-31
+    1|televizor|731|2025-07-30
     """
